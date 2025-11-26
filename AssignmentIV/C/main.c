@@ -14,8 +14,7 @@
    Developer: Pin-Hsiang Chiu <mars35020915@gmail.com>
  */
 
-#include <stdio.h>
-#include <string.h>
+
 #include "hash_fn.h"
 
 // Caution: Do not change the content of this file.
