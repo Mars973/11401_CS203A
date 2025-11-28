@@ -1,12 +1,23 @@
-// knuth_test.cpp
-// g++ -std=c++23 -O2 -Wall -Wextra -o knuth_test_cpp knuth_test.cpp
+#include <cstdint>
+#include <string>
+#include "hash_fn.hpp"
 
-#include <bits/stdc++.h>
-using namespace std;
+// 整數雜湊（Knuth multiplicative hash）
+int myHashInt(int key, int m) {
+    std::uint32_t h = static_cast<std::uint32_t>(key);
+    h = h * 2654435769u;  // Knuth multiplicative constant
+    return h % m;
+}
 
-static constexpr uint32_t KNUTH_A = 2654435761u;
+// 字串雜湊（Polynomial rolling hash + 64-bit Knuth multiplicative）
+int myHashString(const std::string& str, int m) {
+    std::uint64_t sum = 0;
+    const std::uint64_t P = 131;
 
-uint32_t hash_int_knuth(int k, uint32_t m) {
-    uint64_t prod = static_cast<uint64_t>(k) * KNUTH_A;
-    return static_cast<uint32_t>(prod % m);
+    for (unsigned char c : str) {
+        sum = sum * P + c;
+    }
+
+    sum = sum * 11400714819323198485ULL;
+    return static_cast<int>(sum % m);
 }
