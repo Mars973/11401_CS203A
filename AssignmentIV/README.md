@@ -360,17 +360,17 @@ String Keys:
 - Small table sizes still exhibit collisions (e.g., "ant", "pig"), while the large table (m=37) has a more uniform distribution.  
 
 - Example output for integers:
-  ```
-  Hash table (m=10): [7, 0, 3, 2, 5, 8, 7, 0, 9, 2, 3, 6, 5, 8, 7, 0, 3, 2, 5, 8]
+```
+Hash table (m=10): [7, 0, 3, 2, 5, 8, 7, 0, 9, 2, 3, 6, 5, 8, 7, 0, 3, 2, 5, 8]
 Hash table (m=11): [0, 3, 6, 2, 5, 8, 4, 7, 3, 6, 2, 5, 1, 4, 0, 3, 6, 2, 5, 8]
 Hash table (m=37): [15, 18, 21, 31, 34, 0, 10, 13, 23, 26, 34, 0, 10, 13, 23, 26, 29, 2, 5, 8]
-  ```
+```
 - Example output for strings:
-  ```
-  Hash table (m=10): ["cat", "dog", "bat", "cow", "ant", "owl", "bee", "hen", "pig", "fox"] -> [8, 2, 9, 3, 3, 4, 0, 3, 0, 9]
+```
+Hash table (m=10): ["cat", "dog", "bat", "cow", "ant", "owl", "bee", "hen", "pig", "fox"] -> [8, 2, 9, 3, 3, 4, 0, 3, 0, 9]
 Hash table (m=11): ["cat", "dog", "bat", "cow", "ant", "owl", "bee", "hen", "pig", "fox"] -> [5, 0, 9, 6, 10, 0, 8, 8, 4, 6]
 Hash table (m=37): ["cat", "dog", "bat", "cow", "ant", "owl", "bee", "hen", "pig", "fox"] -> [6, 9, 2, 21, 18, 14, 24, 34, 10, 11]
-  ```
+```
 - Observations: 
 - Prime table sizes (m=11 and m=37) give more uniform distribution for both integers and strings.
 - Non-prime or small table sizes (m=10) show noticeable collisions and repeated indices.  
