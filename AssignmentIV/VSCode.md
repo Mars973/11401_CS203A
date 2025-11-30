@@ -4,50 +4,50 @@ MSYS2 is a software distribution and development platform that provides a Unix-l
 
 1. Download MSYS2
 
-Visit the official website:
+  - Visit the official website:
 https://www.msys2.org
 
-Download the latest installer named msys2-x86_64-xxxxxx.exe.
+  - Download the latest installer named msys2-x86_64-xxxxxx.exe.
 
 2. Install MSYS2
 
-Run the installer.
+  - Run the installer.
 
-Choose an installation directory (the default C:\msys64 is recommended).
+  - Choose an installation directory (the default C:\msys64 is recommended).
 
-Proceed with the installation by clicking Next until it finishes.
+  - Proceed with the installation by clicking Next until it finishes.
 
-Launch MSYS2 when prompted.
+  - Launch MSYS2 when prompted.
 
 3. Update the System
 
-After the first launch, update the base system.
-In the MSYS2 MSYS terminal, run:
-
+  - After the first launch, update the base system.
+  - In the MSYS2 MSYS terminal, run:
+```
 pacman -Syu
+```
 
-
-If MSYS2 asks you to close the window after updating, reopen it and continue with:
-
+  - If MSYS2 asks you to close the window after updating, reopen it and continue with:
+```
 pacman -Su
+```
 
-
-This ensures that all packages are up to date.
+  - This ensures that all packages are up to date.
 
 4. Install the GCC Compiler
 
-To compile C and C++ programs, install the following package:
-
+  - To compile C and C++ programs, install the following package:
+```
 pacman -S mingw-w64-ucrt-x86_64-gcc
+```
 
-
-If you also need Make:
-
+  - If you also need Make:
+```
 pacman -S mingw-w64-ucrt-x86_64-make
-
+```
 5. Choose the Correct Terminal
 
-MSYS2 provides several terminals. Each has its own purpose:
+  - MSYS2 provides several terminals. Each has its own purpose:
 
 Terminal	Usage
 MSYS	System utilities (not recommended for compiling).
@@ -55,30 +55,30 @@ MINGW64	64-bit compiler environment.
 UCRT64	Modern runtime and the recommended environment.
 
 To compile programs, open:
-
+```
 MSYS2 UCRT64
-
+```
 
 Compile C or C++ code:
-
+```
 gcc file.c -o file.exe
 g++ file.cpp -o file.exe
-
+```
 6. (Optional) Add MSYS2 to PATH
 
-If you want to use GCC from Windows Command Prompt or PowerShell, add this directory to the system PATH:
-
+  - If you want to use GCC from Windows Command Prompt or PowerShell, add this directory to the system PATH:
+```
 C:\msys64\ucrt64\bin
-
+```
 
 However, this step is optional because it may conflict with other compilers.
 
 7. Verify the Installation
 
-Check whether GCC is working:
-
+  - Check whether GCC is working:
+```
 gcc --version
-
+```
 
 If the version information appears, MSYS2 is installed correctly. 
 ## The problem I encountered
