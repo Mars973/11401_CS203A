@@ -233,7 +233,7 @@ pig     10
 fox     11
 ```
 === Hash Function Observation (C++ Version) ===
-
+```
 === Table Size m = 10 ===
 Key     Index
 -----------------
@@ -347,7 +347,7 @@ bee     24
 hen     34
 pig     10
 fox     11
-  ```
+```
 
 - Observations: 
 Integer Keys:
