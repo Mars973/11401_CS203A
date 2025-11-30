@@ -40,7 +40,7 @@ The final step applies h % m to map the hashed value into the table size m.
 - Rationale: For string keys, I use a combination of Polynomial Rolling Hash and a 64-bit Knuth multiplicative constant.
 
 The polynomial hash treats the string as a base-P polynomial:
-- sum = sum * 131 + c
+- sum = sum * 131 + c  
 Using P = 131 is a widely adopted choice because it provides good dispersion for ASCII and UTF-8 characters.
 The hash accumulates in a 64-bit unsigned integer, which allows support for long strings and naturally incorporates overflow to increase randomness.
 
@@ -58,5 +58,20 @@ This design provides:
 - High hashing speed
 - Low collision probability
 - Strong dispersion for a wide variety of string inputs
-Making it suitable for general-purpose hash tables.
+Making it suitable for general-purpose hash tables.  
+## Experimental Setup
+- Table sizes tested (m): 10, 11, 37
+- Test dataset:
+  - Integers: 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
+  - Strings: "cat", "dog", "bat", "cow", "ant", "owl", "bee", "hen", "pig", "fox"
+- Compiler: GCC and G++
+- Standard: C23 and C++23
+
+## Results
+| Table Size (m) | Index Sequence         | Observation              |
+|----------------|------------------------|--------------------------|
+| 10             | 1, 2, 3, 4, ...        | The pattern repeats every 10 because the table size is small. Collisions occur more frequently, and distribution is cyclic. |
+| 11             | 10, 0, 1, 2, ...       | More uniform distribution. Since 11 is prime, the multiplicative hash spreads values better across the table.            |
+| 37             | 20, 21, 22, 23, ...    | Near-uniform distribution. A large prime table size provides the best spread with minimal collision patterns.             |
+
 
