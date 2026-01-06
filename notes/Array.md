@@ -10,15 +10,12 @@
 
 ## Abstract Data Type
 
-An array is an abstract data type (ADT) that represents a collection of elements, each identified by at least one array index or key. The array ADT supports the following operations:
+- **Access**: 取得指定索引處元素的值。
+- **Update**: 修改指定索引處元素的值。 
+- **Insert**: 在指定位置新增一個元素，並將後續元素向左移動。 
+- **Delete**: 移除指定位置的元素，並將後續元素向左移動。
+- **Traversal**: 依序存取陣列中的每個元素。
 
-- **Access**: Retrieve the value of an element at a specific index. Time complexity: O(1).
-- **Update**: Modify the value of an element at a specific index. Time complexity: O(1).
-- **Insert**: Add an element at a specific position, shifting subsequent elements. Time complexity: O(n).
-- **Delete**: Remove an element at a specific position, shifting subsequent elements. Time complexity: O(n).
-- **Traversal**: Visit each element in the array sequentially. Time complexity: O(n).
-
-Arrays are widely used due to their simplicity and efficiency in accessing elements by index.
 
 ## Array Declaration
 
@@ -126,53 +123,62 @@ for (int i = n / 2; i < n; i++) {
 
 This code demonstrates how to resize a dynamic array, ensuring that the new memory is properly initialized and handling potential memory allocation failures.
 
-## Complexity
+## 陣列（Array）時間與空間複雜度
 
-### Time Complexity
+假設陣列中有 `n` 個元素：
 
-Let \(n\) be the number of elements in the array.
+---
 
-- **Access (read by index)**: \(O(1)\)
-- **Update (write by index)**: \(O(1)\)
-- **Traversal (visit all elements)**: \(O(n)\)
-- **Search**
-    - **Unsorted array (linear search)**: \(O(n)\)
-    - **Sorted array (binary search)**: \(O(log n)\)
-- **Insert**
-    - **At end (if capacity available, e.g., dynamic array)**: amortized \(O(1)\)
-    - **At end (if reallocation needed)**: \(O(n)\)
-    - **At beginning or middle**: \(O(n)\) (shift elements)
-- **Delete**
-    - **At end**: \(O(1)\)
-    - **At beginning or middle**: \(O(n)\) (shift elements)
+### 一、時間複雜度（Time Complexity）
 
-### Space Complexity
+| 操作 | 複雜度 | 說明 |
+|------|--------|------|
+| **存取（透過索引讀取）** | O(1) | 直接訪問特定索引的元素 |
+| **更新（透過索引寫入）** | O(1) | 直接修改特定索引的元素 |
+| **遍歷（訪問所有元素）** | O(n) | 逐一訪問每個元素 |
 
-- **Storage for elements**: \(O(n)\)
-- **Auxiliary space for operations (typical)**: \(O(1)\)
-- **Dynamic array extra capacity**: \(O(n)\) total allocated space; unused capacity can be up to \(O(n)\) depending on the growth strategy.
-- **Resizing (`realloc`)**: \(O(1)\) extra space if grown in place; up to \(O(n)\) extra space temporarily if a new block is allocated and elements are copied.
+#### 搜尋（Search）
+- 無序陣列（線性搜尋）：O(n)  
+- 有序陣列（二分搜尋）：O(log n)  
 
-## Pros & Cons
+#### 插入（Insert）
+- 尾端插入（容量足夠，例如動態陣列）：攤還 O(1)  
+- 尾端插入（需重新配置空間）：O(n)  
+- 開頭或中間插入：O(n)（需要移動元素）  
 
-### Pros
+#### 刪除（Delete）
+- 尾端刪除：O(1)  
+- 開頭或中間刪除：O(n)（需要移動元素）  
 
-- **O(1) random access** by index for reads/writes.
-- **Cache-friendly** due to contiguous memory layout; fast traversal in practice.
-- **Low overhead**: minimal per-element metadata compared to linked structures.
-- **Simple and predictable**: straightforward indexing and iteration.
-- **Dynamic arrays can grow** (via `realloc`) to accommodate more elements when used appropriately.
+---
 
-### Cons
+### 二、空間複雜度（Space Complexity）
 
-- **Static arrays have fixed size** (decided at compile time); cannot resize without creating a new array.
-- **Insert/Delete in the middle is expensive**: requires shifting elements, \(O(n)\).
-- **Resizing dynamic arrays can be costly**: `realloc` may allocate a new block and copy elements, \(O(n)\), and may invalidate old pointers.
-- **Memory limits still apply**: dynamic arrays are constrained by available physical memory / OS-managed heap and allocation fragmentation.
-- **Usage matters**: frequent small growth/shrink operations can cause performance issues; growth strategies (e.g., doubling capacity) are important.
-- **Manual memory management (in C)**: must `free` memory; risk of leaks or use-after-free bugs.
+| 類別 | 複雜度 | 說明 |
+|------|--------|------|
+| **元素存儲** | O(n) | 陣列本身所需空間 |
+| **操作輔助空間** | O(1) | 常見操作（如存取、更新）所需額外空間 |
+| **動態陣列額外容量** | O(n) | 根據增長策略，未使用的容量最多可達 O(n) |
+| **重新分配（realloc）** | O(1)（若在原地增長）<br>上限 O(n)（若需分配新空間並複製元素） | 重新配置空間時的額外需求 |
 
+## 優點與缺點
 
+### 優點（Pros）
+
+- **透過索引可 O(1) 隨機存取**：讀取與寫入速度快。
+- **快取友好（Cache-friendly）**：連續記憶體配置使遍歷效率高。
+- **低額外開銷**：相比鏈結結構，每個元素只需極少的額外資料。
+- **簡單且可預測**：索引存取和迭代操作直觀易懂。
+- **動態陣列可自動擴展**：透過 `realloc` 可在需要時增加容量。
+
+### 缺點（Cons）
+
+- **靜態陣列大小固定**：編譯時決定，若需改變大小必須建立新陣列。
+- **中間插入或刪除代價高**：需移動元素，時間複雜度為 O(n)。
+- **動態陣列重新配置可能昂貴**：`realloc` 可能分配新區塊並複製元素，O(n)，且原有指標可能失效。
+- **仍受記憶體限制**：動態陣列受實體記憶體、作業系統堆區與碎片化影響。
+- **使用方式影響效能**：頻繁小幅增減容量可能降低效能；合理的擴容策略（如倍增）很重要。
+- **手動記憶體管理（C 語言）**：必須手動 `free`，否則可能造成記憶體洩漏或使用已釋放的記憶體。
 ## 基本排序法整理（Basic Sorting Algorithms）
 
 ### 1. Bubble Sort（氣泡排序）
