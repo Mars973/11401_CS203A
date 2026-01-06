@@ -6,7 +6,7 @@
 
 ## Visualization  
 
-![Array](./images/Array.png)
+
 
 ## Abstract Data Type
 
