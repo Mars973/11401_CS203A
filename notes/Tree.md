@@ -316,3 +316,78 @@ D  E F  G
 - **BST / AVL / Red-Black**：強調搜尋效率和平衡性  
 - **Heap**：強調父子大小關係
 
+# 樹（Tree）的操作與時間複雜度
+
+假設樹中有 `n` 個節點，樹高為 `h`。
+
+---
+
+## 1. 搜尋（Search）
+
+- **操作說明**：尋找特定值的節點
+- **時間複雜度**：
+  - **一般 Binary Tree**：O(n)（最壞情況要遍歷所有節點）
+  - **Binary Search Tree (BST)**：O(h) 平均 O(log n)（若平衡）
+  - **AVL / Red-Black Tree**：O(log n)（自動保持平衡）
+
+---
+
+## 2. 插入（Insert）
+
+- **操作說明**：將新節點加入樹
+- **時間複雜度**：
+  - **Binary Tree**：O(n)（可能需要遍歷）
+  - **BST**：O(h) 平均 O(log n)
+  - **AVL / Red-Black Tree**：O(log n)（插入後可能需要旋轉調整平衡）
+
+---
+
+## 3. 刪除（Delete）
+
+- **操作說明**：移除樹中某個節點
+- **時間複雜度**：
+  - **Binary Tree**：O(n)（可能需要遍歷整棵樹）
+  - **BST**：O(h) 平均 O(log n)
+  - **AVL / Red-Black Tree**：O(log n)（刪除後可能旋轉維持平衡）
+
+---
+
+## 4. 遍歷（Traversal）
+
+- **操作說明**：依特定順序拜訪所有節點
+- **時間複雜度**：
+  - **Preorder / Inorder / Postorder / Level Order**：O(n)（每個節點拜訪一次）
+- **空間複雜度**：
+  - 遞迴：O(h)（呼叫堆疊）
+  - 非遞迴 / Level Order（BFS）：O(n)（使用 queue）
+
+---
+
+## 5. 查找最小 / 最大值（Min / Max）
+
+- **操作說明**：找 BST 或 Heap 中的最小或最大元素
+- **時間複雜度**：
+  - **BST**：O(h)（沿左子樹找最小，右子樹找最大）
+  - **Heap**：O(1)（Max Heap 最大值在根，Min Heap 最小值在根）
+
+---
+
+## 6. 高度 / 層數計算（Height / Depth）
+
+- **操作說明**：計算樹的高度
+- **時間複雜度**：O(n)（需要遍歷整棵樹）
+
+---
+
+## 小結（考試重點）
+
+| 操作 | Binary Tree | BST | AVL / Red-Black Tree | 說明 |
+|------|------------|-----|-------------------|------|
+| Search | O(n) | O(h) avg O(log n) | O(log n) | 平衡樹能保證搜尋快 |
+| Insert | O(n) | O(h) avg O(log n) | O(log n) | AVL / RB 插入後需旋轉 |
+| Delete | O(n) | O(h) avg O(log n) | O(log n) | AVL / RB 刪除後需旋轉 |
+| Traversal | O(n) | O(n) | O(n) | 拜訪每個節點一次 |
+| Min / Max | O(n) | O(h) | O(1) (Heap) | BST 左子樹最小，右子樹最大 |
+| Height | O(n) | O(n) | O(log n) | 計算高度需遍歷整棵樹 |
+
+
